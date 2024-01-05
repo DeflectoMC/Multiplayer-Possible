@@ -20,7 +20,7 @@ This code is licensed under Apache 2.0 Commons License, but honestly with how sh
 
 
 
-Potentially Huge Benefits:
+# Potentially Huge Benefits:
 
 - Base free servers for everyone
 
@@ -33,13 +33,25 @@ Potentially Huge Benefits:
 
 - Otherwise unrelated projects could still use the same system to accomplish things like voice chatting on any server, without requiring the server to have a plugin installed.
 
-Notes:
+# Notes:
 
 - I have been working on this topic overall for 3 months now. I've had to do it slowly on my own, do my own research, and find the best options available. This is probably the 6th-8th iteration I've done of this idea, and third open sourced. 
 
-- Nobody decided to help with coding during that entire time. Please do be respectful in your criticisms, and understand that I do care and am just trying to help bring these major benefits to everyone, and not gatekeep the knowledge to myself.
+- Nobody helped me with coding during that entire time. Please do be respectful in your criticisms, and understand that I do care and am just trying to help bring these major benefits to everyone, and not gatekeep the knowledge to myself. 
+
+- I was told this thing was impossible many times, and that it would have zero benefits for anyone. Yet several mods and custom clients use this technique already with hundreds of thousands of users.
 
 - "It's easy to tear down someone else's ship, but very hard to build and successfully sail your own."
+
+# Previous Projects
+
+With a similar concept:
+
+
+- [GameBridge](https://github.com/DeflectoMC/GameBridge/blob/main/README.md)
+- [friendjoin](https://github.com/DeflectoMC/friendjoin/)
+
+
 
 
 
