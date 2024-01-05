@@ -26,7 +26,7 @@ Potentially Huge Benefits:
 
 - Less electricity usage 💚🌎 due to less computers required for multiplayer, and less packets sent over the internet
 
-- Could be turned into a Fabric mod + Bukkit plugin, automated with a full blown /join command etc. That is my current plan. I did it with my previous project using WebRTC, called GameBridge.
+- Could be turned into a Fabric mod + Bukkit plugin, automated with a fully working /join command etc. That is my current plan. I already accomplished it too with my previous project using WebRTC, called GameBridge.
 
 
 - Could be turned into a free server hosting network, by adding a lot more features and making it so players don't have to manually enter the info every time
