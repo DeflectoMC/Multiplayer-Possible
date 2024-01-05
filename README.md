@@ -37,8 +37,9 @@ Notes:
 
 - I have been working on this topic overall for 3 months now. I've had to do it slowly on my own, do my own research, and find the best options available. This is probably the 6th-8th iteration I've done of this idea, and third open sourced. 
 
-- Nobody wanted to help me code it. Please do be respectful in your criticisms, and understand that I do care and am just trying to help bring these major benefits to everyone, and not gatekeep the knowledge to myself.
+- Nobody decided to help with coding during that entire time. Please do be respectful in your criticisms, and understand that I do care and am just trying to help bring these major benefits to everyone, and not gatekeep the knowledge to myself.
 
+- "It's easy to tear down someone else's ship, but very hard to build and successfully sail your own."
 
 
 
