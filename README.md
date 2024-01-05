@@ -55,6 +55,10 @@ With a similar concept:
 - [friendjoin](https://github.com/DeflectoMC/friendjoin/)
 
 
+# Discord
 
+Feel free to chat about any of my projects here, or share your own!
+
+[Deflecto's Projects Discord Server](http://exJ3zTjUQU)
 
 
