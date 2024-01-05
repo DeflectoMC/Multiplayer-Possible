@@ -9,6 +9,9 @@ I will be adding Wiki pages tomorrow, more tutorial videos, etc.
 
 For now, you can find the simplest possible example (50 lines of code) in the file named SimplerExample.java.
 
+### License
+
+
 This code is licensed under Apache 2.0 Commons License, but honestly with how short it is, you could probably just copy the *idea* instead of the code; and then you wouldn't have to include a copy of the license would you 😉
 
 
