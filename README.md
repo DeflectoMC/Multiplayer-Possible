@@ -1,13 +1,22 @@
 # Multiplayer-Possible
 A simple demonstration program on doing LAN outside of LAN.
 
+# Downloads
+
+Head over to the [releases page](https://github.com/DeflectoMC/Multiplayer-Possible/releases/) for downloads.
+
+# Code
+
+
+
+
 Maven/Gradle files have not been added yet; I've compiled this directly in my IDE.
 
 You are free to use this as a reference for how to accomplish this technique on your own.
 
 I will be adding Wiki pages tomorrow, more tutorial videos, etc.
 
-For now, you can find the simplest possible example (50 lines of code) in the file named SimplerExample.java.
+For now, you can find the simplest possible example (50 lines of code) in the file named `SimplerExample.java`.
 
 ### License
 
