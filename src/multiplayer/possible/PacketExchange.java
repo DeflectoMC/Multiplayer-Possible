@@ -4,6 +4,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
+
+/**Helpful utility used in Main.java*/
 public class PacketExchange {
 	
 	private Socket socket;
@@ -11,7 +13,9 @@ public class PacketExchange {
 	public PacketExchange(Socket socket) {
 		this.socket = socket;
 	}
-	
+
+
+	/**Sends packets between the game server/player and the bridging connection, until the player disconnects.*/
 	public void exchangePacketsUntilClosed(Socket connection) {
 		try {
 			_exchangePacketsUntilClosed(connection);
