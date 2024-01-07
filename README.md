@@ -16,8 +16,6 @@ You are free to use this as a reference for how to accomplish this technique on 
 
 I will be adding Wiki pages tomorrow, more tutorial videos, etc.
 
-For now, you can find the simplest possible example (50 lines of code) in the file named `SimplerExample.java`.
-
 ### License
 
 
