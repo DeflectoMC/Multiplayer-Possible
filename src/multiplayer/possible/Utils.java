@@ -7,6 +7,8 @@ import java.net.Socket;
 
 public class Utils {
 	
+	public static final byte[] CLOSE_PACKET = new byte[1];
+	
 	public static void close(ServerSocket serverSocket) {
 		try {
 			serverSocket.close();
@@ -72,6 +74,13 @@ public class Utils {
 			return false;
 		}
 		return true;
+	}
+	
+	public static boolean isOpen(Socket s) {
+		return !s.isClosed()
+				&& s.isConnected()
+				&& !s.isInputShutdown()
+				&& !s.isOutputShutdown();
 	}
 
 }
