@@ -1,132 +1,122 @@
 package multiplayer.possible;
 
+import java.awt.Desktop;
+import java.awt.Desktop.Action;
+import java.io.File;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketTimeoutException;
+import java.net.URI;
+import java.util.concurrent.CompletableFuture;
 
 public class Main {
-	
+
 	public static void main(String[] args) throws Exception {
-		GUI g = new GUI("Multiplayer-Possible");
-		String choice = g.prompt("Pick an option", "Host", "Join");
+		File f = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+		f = f.getParentFile();
+		f = new File(f, "Multiplayer-Possible");
+		if (!f.exists()) f.mkdirs();
+		
+		GUI gui = new GUI("Multiplayer-Possible");
+		
+		File g = null;
+		for (File f2 : f.listFiles()) {
+			if (f2.getName().startsWith("gole")) {
+				if (f2.getName().contains(".zip") || f2.getName().contains(".tar")) {
+					gui.info(f2.getName() + " is a compressed file and not the actual program.\nYou'll need to extract it into your Multiplayer-Possible folder");
+					if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Action.OPEN)) {
+						Desktop.getDesktop().open(f);
+					}
+					return;
+				}
+				f2.setExecutable(true);
+				g = f2;
+				break;
+			}
+		}
+		
+		if (g == null || !g.exists()) {
+			
+			String choice = gui.prompt("Welcome to Multiplayer-Possible!\nThis version uses a program called Gole\nto allow you to connect reliably with your friends without any issues.\nAs you're running this for the first time,\nyou'll need a version of Gole to be placed into your Multiplayer-Possible folder.", "Show official homepage", "Show official downloads");
+			String url = choice.contains("homepage") ? "https://github.com/shawwwn/Gole" : "https://github.com/shawwwn/Gole/releases";
+			
+			if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Action.BROWSE)) {
+				Desktop.getDesktop().browse(new URI(url));
+				Thread.sleep(500l);
+			} else {
+				gui.info("Your operating system does not support Java opening a link for you.\nThe link you need to go to is " + url);
+				return;
+			}
+			
+			if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Action.OPEN)) {
+				Desktop.getDesktop().open(f);
+				Thread.sleep(500l);
+			}
+			return;
+		}
+		
+		String choice = gui.prompt("Select an option", "Host", "Join");
 		boolean isClient = choice.equals("Join");
 		String peerName = isClient ? "server" : "client";
-		String addr = g.prompt("Enter the " + peerName + "'s public ip address");
-		InetAddress address = InetAddress.getByName(addr);
-		String nickname = (isClient) ? g.prompt("Enter a nickname") : g.prompt("Enter the client's nickname");
+		String edition = gui.prompt("Select a game version", "Minecraft: Java Edition", "Minecraft: Bedrock Edition", "A different game");
 		
-		int port = 40_000 + (nickname.hashCode() % 20_000);
-		int port1 = (isClient) ? port : port+1;
-		int port2 = (isClient) ? port+1 : port;
+		String protocol = edition.contains("Java") ? "tcp" : "udp";
+		int gamePort = edition.contains("Java") ? 25565 : 19132;
 		
-		if (isClient) {
-			g.info("Press ok when the host is ready");
-		} else {
-			g.info("Press ok to be ready");
-			Socket s = new Socket();
-			s.setReuseAddress(true);
-			s.bind(new InetSocketAddress("0.0.0.0", port1));
-			try {
-				s.connect(new InetSocketAddress(address, port2), 100);
-			} catch (Exception ex) {
-				s.close();
-			}
-		}
-		
-		Socket connection;
-		ServerSocket ss = null;
-		
-		if (isClient) {
-			connection = new Socket();
-			connection.setReuseAddress(true);
-			connection.bind(new InetSocketAddress("0.0.0.0", port1));
-			try {
-				connection.connect(new InetSocketAddress(address, port2), 10000);
-			} catch (Exception ex) {
-				g.info("Failed to connect");
-				connection.close();
-				return;
-			}
-		} else {
-			ss = new ServerSocket();
-			ss.setReuseAddress(true);
-			ss.bind(new InetSocketAddress("0.0.0.0", port1));
-			try {
-				connection = ss.accept();
-			} catch (Exception ex) {
-				g.info("Failed to connect");
-				ss.close();
-				return;
-			}
-		}
-		
-		connection.setKeepAlive(true);
-		if (isClient) {
-			
-			ServerSocket proxy2client = new ServerSocket();
-			proxy2client.setReuseAddress(true);
-			proxy2client.setSoTimeout(10000);
-			proxy2client.bind(new InetSocketAddress("127.0.0.1", 35585));
-			new Thread(() -> {
-				g.info("Success! Waiting for you to join at 127.0.0.1:35585");
-			}).start();
-			
-			while (Utils.isOpen(connection) && !proxy2client.isClosed()) {
-				
-				connection.setSoTimeout(2000);
-				while (Utils.isOpen(connection)) {
-					try {
-						connection.getInputStream().read(new byte[Utils.CLOSE_PACKET.length]);
-					} catch (SocketTimeoutException ex) {
-						break;
-					} catch (Exception ex) {
-						ex.printStackTrace();
-						break;
-					}
-				}
-				
-				connection.setSoTimeout(0);
-				
-				System.out.println("Ready");
-				Socket player;
+		if (edition.contains("different")) {
+			protocol = gui.prompt("Does this game use TCP or UDP?", "UDP", "TCP").toLowerCase();
+			if (!isClient) {
+				String s = gui.prompt("Enter the port that your server is running on");
+				gamePort = -1;
 				try {
-					player = proxy2client.accept();
-				} catch (Exception ex) {
-					if (!proxy2client.isClosed()) {
-						connection.getOutputStream().write(Utils.CLOSE_PACKET);
-						connection.getOutputStream().flush();
-					}
-					continue;
+					gamePort = Integer.parseInt(s);
+				} catch (Exception ex) {}
+				if (gamePort < 0 || gamePort > 65535) {
+					gui.info("Invalid port: " + s + ". Should be a positive integer less than 65535");
+					return;
 				}
-				System.out.println("Player joining");
-				PacketExchange p = new PacketExchange(player);
-				p.exchangePacketsUntilClosed(connection);
-				System.out.println("Sent close packet");
-			}
-		} else {
-			System.out.println("Received connection from player");
-			byte[] packet = new byte[2 * 1024 * 1024];
-			while (Utils.isOpen(connection)) {
-				int r = connection.getInputStream().read(packet);
-				if (r < 0) break;
-				if (r == Utils.CLOSE_PACKET.length) {
-					connection.getOutputStream().write(Utils.CLOSE_PACKET);
-					connection.getOutputStream().flush();
-					System.out.println("Echoed close packet");
-					continue;
-				}
-				Socket proxy2server = new Socket();
-				proxy2server.bind(new InetSocketAddress("127.0.0.1", 0));
-				proxy2server.connect(new InetSocketAddress("127.0.0.1", 25565));
-				proxy2server.getOutputStream().write(packet, 0, r);
-				proxy2server.getOutputStream().flush();
-				PacketExchange p = new PacketExchange(proxy2server);
-				p.exchangePacketsUntilClosed(connection);
-				System.out.println("Sent close packet");
 			}
 		}
-	}
+		
+		if (isClient) {
+			gamePort = protocol.contains("tcp") ? 35585 : 39332;
+		}
+		
+		String addr = gui.prompt("Enter the " + peerName + "'s public ip address");
+		try {
+			InetAddress.getByName(addr);
+		} catch (Exception ex) {
+			gui.info("Couldn't parse IP address \"" + addr + "\"");
+			return;
+		}
+		
+		String nickname = (isClient) ? gui.prompt("Enter a nickname") : gui.prompt("Enter the client's nickname");
 
+		int port = 40_000 + (nickname.hashCode() % 20_000);
+		int port1 = isClient ? port : port+1;
+		int port2 = isClient ? port+1 : port;
+		
+		CompletableFuture<Void> future = Executor.execute(g, protocol, addr, port1, port2, isClient, gamePort);
+		
+		long wait = System.currentTimeMillis() + (150000);
+		while (!future.isDone() && System.currentTimeMillis() <= wait) {
+			Thread.sleep(1000l);
+		}
+		
+		if (!future.isDone()) {
+			future.cancel(true);
+			gui.info("Failed to connect after 2 minutes and 30 seconds");
+			System.exit(0);
+			return;
+		}
+		
+		if (isClient) {
+			gui.info("Connection established!\n\nWaiting for you to join @ 127.0.0.1:" + gamePort);
+		} else {
+			gui.info("Connection established!\nWaiting for the player to join");
+		}
+		
+		gui.info("Press Ok to quit the program and close your connection");
+		System.exit(0);
+		
+		
+	}
 }
