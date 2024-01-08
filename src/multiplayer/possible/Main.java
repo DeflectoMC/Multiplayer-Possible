@@ -62,7 +62,7 @@ public class Main {
 		int gamePort = edition.contains("Java") ? 25565 : 19132;
 		
 		if (edition.contains("different")) {
-			protocol = gui.prompt("Does this game use TCP or UDP?", "UDP", "TCP").toLowerCase();
+			protocol = gui.prompt("Does this game use TCP or UDP?", "TCP", "UDP").toLowerCase();
 			if (!isClient) {
 				String s = gui.prompt("Enter the port that your server is running on");
 				gamePort = -1;
