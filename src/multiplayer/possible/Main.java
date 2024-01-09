@@ -73,6 +73,16 @@ public class Main {
 					gui.info("Invalid port: " + s + ". Should be a positive integer less than 65535");
 					return;
 				}
+			} else {
+				String s = gui.prompt("Enter the port that you will join the game from");
+				gamePort = -1;
+				try {
+					gamePort = Integer.parseInt(s);
+				} catch (Exception ex) {}
+				if (gamePort < 0 || gamePort > 65535) {
+					gui.info("Invalid port: " + s + ". Should be a positive integer less than 65535");
+					return;
+				}
 			}
 		} else if (isClient) {
 			gamePort = protocol.contains("tcp") ? 35585 : 39332;
