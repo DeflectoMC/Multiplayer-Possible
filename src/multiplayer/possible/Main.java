@@ -74,9 +74,7 @@ public class Main {
 					return;
 				}
 			}
-		}
-		
-		if (isClient) {
+		} else if (isClient) {
 			gamePort = protocol.contains("tcp") ? 35585 : 39332;
 		}
 		
