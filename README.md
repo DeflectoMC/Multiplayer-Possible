@@ -5,7 +5,7 @@
 
 [![Video](https://img.youtube.com/vi/tx4jvZCSlXA/0.jpg)](http://www.youtube.com/watch?v=tx4jvZCSlXA)
 
-[See Also: Unrelated video that explains the main concepts but for a different game](https://www.youtube.com/watch?v=T9wn1z4FlnA)
+[Further reading: Unrelated video that explains the main concepts but for a different game](https://www.youtube.com/watch?v=T9wn1z4FlnA)
   
 # Multiplayer-Possible
 ### A program that allows you to join & host servers ran at home.
