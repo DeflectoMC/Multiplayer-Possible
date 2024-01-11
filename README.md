@@ -55,7 +55,7 @@ Helps out small groups of friends
 
 💚🌎 Better for the Environment 🌎💚
 - When you play and host on the same computer, you don't use the internet for that connection.
-- Reusing the same computer to join and host at the same time means one less computer has to be running electricity.
+- Reusing the same computer to join and host at the same time means one less computer has to be running and using electricity.
 
 You can join a server you're running on your computer via 127.0.0.1 or "localhost" as the server IP.
 
