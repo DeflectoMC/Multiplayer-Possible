@@ -34,7 +34,7 @@
 
 Puts control in server owners' hands:
 
-- You don't buy anything
+- You don't have to buy anything
 - You choose how much RAM your server gets
 - You choose your max player count
 - You retain control over your server's files
