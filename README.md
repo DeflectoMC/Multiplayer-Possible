@@ -59,4 +59,4 @@ Helps out small groups of friends
 
 You can join a server you're running on your computer via 127.0.0.1 or "localhost" as the server IP.
 
-## [Click here to read the Wiki for more info on how it works, as well as safety tips](https://github.com/DeflectoMC/Multiplayer-Possible/wiki)
+## [Click here to read the Wiki for more info on how it works, as well as general safety tips when running a Minecraft server](https://github.com/DeflectoMC/Multiplayer-Possible/wiki)
