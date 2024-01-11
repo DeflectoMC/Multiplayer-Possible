@@ -59,6 +59,6 @@ Helps out small groups of friends
 
 You can join a server you're running on your computer via 127.0.0.1 or "localhost" as the server IP.
 
-[More info that wasn't included in the README (such as info on recent updates) is on the Wiki](https://github.com/DeflectoMC/Multiplayer-Possible/wiki) 🙂
+[More info that wasn't included in the README (such as info on recent updates, or Server Safety & Precautions Guidebook) is on the Wiki.](https://github.com/DeflectoMC/Multiplayer-Possible/wiki) 🙂
 
-## [Click here to read the Server Safety & Precautions guide](https://github.com/DeflectoMC/Multiplayer-Possible/wiki/Server-Safety-%26-Precautions-Guidebook)
+## [Click here to read the Wiki](https://github.com/DeflectoMC/Multiplayer-Possible/wiki)
