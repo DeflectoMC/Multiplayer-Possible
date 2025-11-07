@@ -63,4 +63,4 @@ You can join a server you're running on your computer via 127.0.0.1 or "localhos
 
 # Credits
 
-This project requires and uses [Gole](https://github.com/shawwwn/Gole)
+This project uses [Gole](https://github.com/shawwwn/Gole)
